@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720004301) do
+ActiveRecord::Schema.define(version: 20160803182348) do
 
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "metric_name"
-    t.text     "options"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "encrypted_options"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "configs", ["project_id"], name: "index_configs_on_project_id"
@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20160720004301) do
   create_table "metric_samples", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "metric_name"
-    t.text     "raw_data"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "encrypted_raw_data"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "metric_samples", ["project_id", "metric_name"], name: "index_metric_samples_on_project_id_and_metric_name"
