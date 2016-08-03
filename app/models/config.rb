@@ -4,6 +4,7 @@ class Config < ActiveRecord::Base
   validates_uniqueness_of :metric_name, :scope => :project_id
   serialize :options, Hash
 
+  attr_encrypted :options, :key => Figaro.env.attr_encrypted_key!
   attr_accessible :options, :metric_name
 
 end

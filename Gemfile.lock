@@ -52,6 +52,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (6.0.3)
+    attr_encrypted (3.0.3)
+      encryptor (~> 3.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -95,6 +97,7 @@ GEM
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
+    encryptor (3.0.0)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -102,6 +105,8 @@ GEM
     factory_girl_rails (4.7.0)
       factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
+    figaro (1.1.1)
+      thor (~> 0.14)
     gherkin (4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -243,12 +248,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_encrypted
   byebug
   coffee-rails (~> 4.1.0)
   cucumber-rails
   cucumber-rails-training-wheels
   database_cleaner
   factory_girl_rails
+  figaro
   haml
   jbuilder (~> 2.0)
   jquery-rails
