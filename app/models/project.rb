@@ -20,11 +20,14 @@ class Project < ActiveRecord::Base
 
   # Recompute latest scores and images WITHOUT refreshing raw data
   def update_scores_and_images
+    @current_scores ||= {}
+    @current_images ||= {}
     # Compute and cache newest scores and images based on latest sample data.
     # optional logic here to short-circuit the method if no new samples since last update
-    ProjectMetric.metric_names.each do |metric|
+    ProjectMetrics.metric_names.each do |metric|
       latest_sample = self.metric_samples.where(:metric_name => metric).first
-      metric_instance = class_for(metric).new({}, latest_sample.raw_data)
+      credentials_hash = self.configs.where(:metric_name => metric).first.options
+      metric_instance = ProjectMetrics.class_for(metric).new(credentials_hash, latest_sample.raw_data)
       @current_scores[metric] = metric_instance.score
       @current_images[metric] = metric_instance.image
     end
@@ -33,10 +36,10 @@ class Project < ActiveRecord::Base
   # Refresh raw data for all metrics
   def refresh_all_metrics!
     # Update (re-sample) all metrics for this project
-    ProjectMetric.metric_names.each do |metric|
+    ProjectMetrics.metric_names.each do |metric|
       # get credentials hash for this metric
-      credentials_hash = self.configs.where(:metric_name => metric).credentials
-      sample = ProjectMetric.class_for(metric).new(credentials_hash) # abstract factory
+      credentials_hash = self.configs.where(:metric_name => metric).first.options
+      sample = ProjectMetrics.class_for(metric).new(credentials_hash) # abstract factory
       if (sample.refresh)
         self.metric_samples.create!(:metric_name => metric,:raw_data => sample.raw_data)
       end
