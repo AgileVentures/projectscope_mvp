@@ -21,3 +21,8 @@ log/
 TAGS
 .byebug_history
 .idea/
+
+# Ignore application configuration
+/config/application.yml
+coverage/
+.autotest
