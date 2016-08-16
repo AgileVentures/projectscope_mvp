@@ -1,3 +1,5 @@
 language: ruby
 rvm:
   - 2.3.1
+before_script:
+  - gpg --passphrase "$APP_SECRET" --output config/application.yml --decrypt config/application.yml.asc

@@ -22,3 +22,7 @@ TAGS
 .byebug_history
 .idea/
 /**/.DS_Store
+# Ignore application configuration
+/config/application.yml
+coverage/
+.autotest

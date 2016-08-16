@@ -7,7 +7,12 @@ gem 'project_metrics', git: 'https://github.com/AgileVentures/ProjectMetrics/'
 gem 'project_metric_code_climate', git: 'https://github.com/AgileVentures/project_metric_code_climate', branch: '3_return_svg_direct'
 gem 'project_metric_github', git: 'https://github.com/AgileVentures/project_metric_github', branch: '4_update_to_original_projectscope_metric'
 
+# use Rails 3-style protected attributes rather than strong params
 gem 'protected_attributes'
+# Securely store secrets, including symmetric encrypt key for attr_encrypted
+gem 'attr_encrypted'
+gem 'figaro'
+
 gem 'rails', '4.2.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
