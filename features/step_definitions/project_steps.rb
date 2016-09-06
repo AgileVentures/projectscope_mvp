@@ -54,3 +54,7 @@ end
 Given(/^A project update job has been run$/) do
   Project.all.each &:resample_all_metrics
 end
+
+And(/^I am logged in$/) do
+  page.driver.basic_authorize('cs169', ENV['PROJECTSCOPE_PASSWORD'])
+end

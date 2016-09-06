@@ -8,6 +8,7 @@ Feature: add project and its config/credentials info
   Scenario: add project with config info for CodeClimate gem
 
     Given I am on the projects page
+    And I am logged in
     When I follow "New Project"
     And I fill in "Name" with "Test Project"
     And I enter new "Code Climate" config values:
