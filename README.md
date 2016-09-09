@@ -2,7 +2,7 @@
 <a href="https://travis-ci.org/AgileVentures/projectscope_mvp"><img src="https://travis-ci.org/AgileVentures/projectscope_mvp.svg?branch=master"></a>
 # MVP dashboard for ProjectScope
 
-A dashboard to show project metrics such as those supported by gems like 
+A dashboard to show project metrics such as those supported by gems like
 [project_metric_code_climate](https://github.com/AgileVentures/project_metric_code_climate),
 [project_metric_github](https://github.com/AgileVentures/project_metric_github),
 and others, using the [project_metrics](https://github.com/AgileVentures/project_metrics) gem to wrap
@@ -23,7 +23,7 @@ Then you can use the web interface to create projects.  Both the above gems (git
 
 "url" "http://github.com/AgileVentures/LocalSupport"
 
-specifying the github url for the project.  In order to generate sample metrics to show up in the project index page, 
+specifying the github url for the project.  In order to generate sample metrics to show up in the project index page,
 run rails console like so:
 
 ```GITHUB_ACCESS_TOKEN=<YOUR_ACCESS_TOKEN> rails c```
@@ -34,6 +34,9 @@ if you then run
 
 on the console (and the GITHUB_ACCESS_TOKEN env var is set) it will generate a set of samples you can then see in the interface
 
+or execute
+
+```rake project:resample_all```
 
 # Managing the app secret
 
@@ -45,7 +48,7 @@ Let us call the key used to encrypt this file the "main secret".
 
 **This means** the file `config/application.yml` must be created on the
 fly (**and should never be
-versioned**), by decrypting `application.yml.asc` with the main 
+versioned**), by decrypting `application.yml.asc` with the main
 secret, to run the app or its tests.  Here's how to do it:
 
 * On your local machine for development: run the following command line
@@ -70,14 +73,14 @@ If the value of `APP_SECRET` or any of the values in
 0. commit the new version of `config/application.yml.asc`
 
 0. if `$APP_SECRET` changed, change the value of the corresponding
-environment variable in CI, as above 
+environment variable in CI, as above
 
-TODO 
+TODO
 ----
 
 * [ ] should we be passing global project tokens via project metric settings? (github gem relying on ENV var)
 * [ ] get versions of the gems stored in db for future reference?
 * [ ] get JSON API set up so that other services can consume our data
 * [ ] get some sad path testing in place
-* [ ] get some rspecs on the individual models? 
+* [ ] get some rspecs on the individual models?
 * [ ] make cukes higher level?
