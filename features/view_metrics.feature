@@ -30,6 +30,7 @@ Feature: View A Projects Metrics
     And I should see "0.7" within "#LocalSupport_github_metric"
     And I should see "0.6" within "#WebsiteOne_github_metric"
 
+  @rake
   Scenario: update metrics for projects
     Given A project update job has been run
     When I am on the projects page

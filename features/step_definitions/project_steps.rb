@@ -52,7 +52,7 @@ Given(/^they have the following metric samples:$/) do |table|
 end
 
 Given(/^A project update job has been run$/) do
-  Project.all.each &:resample_all_metrics
+  $rake['project:resample_all'].execute
 end
 
 And(/^I am logged in$/) do
