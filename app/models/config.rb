@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: configs
+#
+#  id                   :integer          not null, primary key
+#  project_id           :integer
+#  metric_name          :string
+#  encrypted_options    :text
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  encrypted_options_iv :string
+#
+
 class Config < ActiveRecord::Base
   belongs_to :project
   scope :for, ->(metric_name) { where(:metric_name => metric_name).first }

@@ -40,4 +40,8 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   ENV['attr_encrypted_key'] = '123456789012345678901234567890123456789012345678901234567890'
+
+  # set up according to devise instruction
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 end

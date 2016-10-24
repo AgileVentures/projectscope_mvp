@@ -5,17 +5,9 @@ end
 
 When /^I enter new "(.*)" config values/ do |metric, table|
   fieldset_id = metric.downcase.gsub(' ', '_') # "Code Climate" => "code_climate"
-  (table.hashes.length - 1).times do
-    within "##{fieldset_id}" do
-      click_link 'Add new'
-    end
-  end
-  idx = 0
-  all_inputs = page.all("fieldset##{fieldset_id} .newf")
   table.hashes.each do |h|
-    all_inputs[idx].set h['key']
-    all_inputs[idx+1].set h['value']
-    idx += 2
+    credential = h['key']
+    fill_in("#{fieldset_id}_#{credential}", :with => h['value'])
   end
 end
 
@@ -56,7 +48,11 @@ Given(/^A project update job has been run$/) do
 end
 
 And(/^I am logged in$/) do
-  page.driver.basic_authorize('cs169', ENV['PROJECTSCOPE_PASSWORD'])
+  steps %Q{
+    Given admin with email "test-admin@test.com" and password "testadminofprojectscope" exists
+    Given I am on the login page
+    When I sign in as admin with email "test-admin@test.com" and password "testadminofprojectscope"
+  }
 end
 
 Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|
@@ -70,4 +66,12 @@ Given(/^the date is "([^"]*)"$/) do |date|
   year = Integer($3,10)
   new_time = Time.utc(year, month,day, 12, 0, 0)
   Timecop.travel(new_time)
+end
+# Make sure that one string (regexp) occurs before or after another one
+#   on the same page
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.body is the entire content of the page as a string.
+  !(/#{e1}.*#{e2}/m =~ page.body).nil?
 end

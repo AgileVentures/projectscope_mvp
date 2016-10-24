@@ -1,5 +1,13 @@
+Main Repo Status:
+
 <a href="https://codeclimate.com/github/AgileVentures/projectscope_mvp"><img src="https://codeclimate.com/github/AgileVentures/projectscope_mvp/badges/gpa.svg" /></a>
 <a href="https://travis-ci.org/AgileVentures/projectscope_mvp"><img src="https://travis-ci.org/AgileVentures/projectscope_mvp.svg?branch=master"></a>
+
+CS169 Group Forked Repo Status:
+
+<a href="https://codeclimate.com/github/DrakeW/projectscope"><img src="https://codeclimate.com/github/DrakeW/projectscope/badges/gpa.svg" /></a>
+<a href="https://travis-ci.org/DrakeW/projectscope"><img src="https://travis-ci.org/DrakeW/projectscope.svg?branch=develop"></a>
+
 # MVP dashboard for ProjectScope
 
 A dashboard to show project metrics such as those supported by gems like

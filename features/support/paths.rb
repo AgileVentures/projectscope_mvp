@@ -19,6 +19,8 @@ module NavigationHelpers
         '/projects'
       when /^the edit page for project "(.*)"$/ then
         "/projects/#{Project.find_by(name: $1).id}/edit"
+      when /^the login page/ then
+        '/users/sign_in'
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

@@ -1,0 +1,23 @@
+%h1 Whitelist
+
+%table
+  %thead
+    %tr
+      %th Authorized Users
+      %th Action
+
+  %tbody
+    - @permitted_users.each do |user|
+      %tr
+        %td= user.email
+        %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.email} from the whitelist?" }, :user => user
+
+%br/
+
+= link_to 'Back to project page', projects_url
+
+%br/
+
+= link_to 'Add user to whitelist', new_whitelist_path
+
+
