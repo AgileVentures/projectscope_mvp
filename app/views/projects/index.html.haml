@@ -1,6 +1,6 @@
 %h1 Project List
 
-%table
+%table{:id => "projects_table"}
   %thead
     %tr
       %th Project Name
@@ -8,9 +8,9 @@
         %th
           = metric_name.camelcase
           Metric
-  %tbody
+  %tbody{"data-update-url" => "#{sort_projects_path}"}
     - @projects.each do |project|
-      %tr
+      %tr{:id => "project_#{project.id}"}
         %td= link_to project.name, project
         - project.latest_metric_samples.each do |sample|
           - unless sample.try(:metric_name).nil?

@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.order(:position).all
     @metric_names = ProjectMetrics.metric_names
   end
 
@@ -63,6 +63,13 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def sort
+    params[:project].each_with_index do |id, index|
+      Project.update(id.to_i, :position => index + 1)
+    end
+    render nothing: true
   end
 
   private

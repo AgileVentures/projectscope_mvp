@@ -15,7 +15,9 @@ class Project < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
 
   accepts_nested_attributes_for :configs
-  attr_accessible :name, :configs_attributes
+  attr_accessible :name, :configs_attributes, :position
+
+  before_create :create_position
 
   def config_for(metric)
     configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
@@ -43,6 +45,13 @@ class Project < ActiveRecord::Base
         )
       end
     end
+  end
+
+  private
+
+  def create_position
+    m = Project.maximum("position")
+    self.position = if m.nil? then 0 else (m+1) end
   end
 
 end
