@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :resample]
   before_action :authenticate_user!
 
   # GET /projects
@@ -71,6 +71,12 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # PUT /projects/1/resample
+  def resample
+    @project.resample_all_metrics
+    redirect_to projects_url, notice: 'Task has been added. Please refresh later to see the latest data.'
   end
 
   private
