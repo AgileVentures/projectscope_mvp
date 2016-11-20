@@ -2,12 +2,13 @@
 
 %h1 Project List
 
-%table
+%table{:class => 'table'}
   %thead
     %tr
       %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name"
       - @metric_names.each do |metric_name|
         %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name
+      %th Resample
   
   %tbody
     - @projects.each do |project|
@@ -18,6 +19,8 @@
             %td{:id => "#{project.name}_#{sample.try(:metric_name)}_metric"}
               = '%.2f'.try(:%,sample.try(:score) || 0.0)
               #{raw sample.try(:image)}
+        %td
+          = link_to 'Resample', resample_project_path(project.id), method: :put, :class => 'btn btn-primary'
 
 %br/
 

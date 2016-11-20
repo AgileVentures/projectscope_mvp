@@ -54,5 +54,6 @@ class Project < ActiveRecord::Base
       end
     end
   end
+  handle_asynchronously :resample_metric
 
 end
