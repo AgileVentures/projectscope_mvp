@@ -21,5 +21,8 @@ class Config < ActiveRecord::Base
 
   attr_accessible :options, :metric_name
 
+  def klass
+  	ProjectMetrics.class_for self.metric_name
+  end
 end
 

@@ -5,17 +5,9 @@ end
 
 When /^I enter new "(.*)" config values/ do |metric, table|
   fieldset_id = metric.downcase.gsub(' ', '_') # "Code Climate" => "code_climate"
-  (table.hashes.length - 1).times do
-    within "##{fieldset_id}" do
-      click_link 'Add new'
-    end
-  end
-  idx = 0
-  all_inputs = page.all("fieldset##{fieldset_id} .newf")
   table.hashes.each do |h|
-    all_inputs[idx].set h['key']
-    all_inputs[idx+1].set h['value']
-    idx += 2
+    credential = h['key']
+    fill_in("#{fieldset_id}_#{credential}", :with => h['value'])
   end
 end
 

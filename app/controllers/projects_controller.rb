@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+
+  before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
   # GET /projects
@@ -30,6 +32,14 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @project.configs.each do |config|
+      name = config.metric_name
+      if config.klass.respond_to?(:credentials)
+        config.options.each_pair do |key,_val|
+            @existed_configs[name] << key.to_sym
+        end
+      end
+    end
   end
 
   # POST /projects
@@ -78,6 +88,13 @@ class ProjectsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.includes(:configs).find(params[:id])
+  end
+
+  def init_existed_configs
+    @existed_configs = {}
+    ProjectMetrics.metric_names.each do |name|
+      @existed_configs[name] = []
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
