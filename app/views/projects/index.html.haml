@@ -1,14 +1,25 @@
 %h3#gap Project List
 
-
 #gap= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
+
+%div.slider-container
+  %div
+    Current date:
+    = fa_icon "angle-left", :class => "btn btn-default btn-sm date-nav", :id => "day-before"
+    %strong{:id => "date-label"}= Date.today.to_s
+    = fa_icon "angle-right", :class => "btn btn-default btn-sm date-nav", :id => "day-after"
+  %br/
+  %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+  %div#slider-progress-indicator
+    Loading...
+%br/
 
 %table#projectlist
   %thead
     %tr
-      %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name"
+      %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
       - @metric_names.each do |metric_name|
-        %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name
+        %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name, :method => :get
   
   %tbody
     - @projects.each do |project|
@@ -16,9 +27,9 @@
         %td= link_to project.name, project
         - project.latest_metric_samples.each do |sample|
           - if is_selected_metric? sample
-            %td{:id => "#{project.name}_#{sample.try(:metric_name)}_metric"}
-              = '%.2f'.try(:%,sample.try(:score) || 0.0)
-              #{raw sample.try(:image)}
+            %td{:id => "project_#{project.id}_#{sample.try(:metric_name)}_metric", :class => metric_content_class_label(sample)}
+              %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
+              %span{:class => "metric_image"}#{raw sample.try(:image)}
 
 %br/
 

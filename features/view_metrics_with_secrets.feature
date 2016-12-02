@@ -32,13 +32,13 @@ Feature: View A Projects Metrics with Secrets
 
   Scenario: view metric for projects
     When I am on the projects page
-    Then I should see "0.2" within "#LocalSupport_slack_metric"
-    And I should see "0.3" within "#WebsiteOne_slack_metric"
+    Then I should see "0.2" within "#project_1_slack_metric"
+    And I should see "0.3" within "#project_2_slack_metric"
 
   @rake @timetravel
   Scenario: update metrics for projects
     Given the date is "10/08/2016"
     Given A project update job has been run
     When I am on the projects page
-    Then I should see "0.14" within "#LocalSupport_slack_metric"
-    And I should see "0.22" within "#WebsiteOne_slack_metric"
+    Then I should see "0.14" within "#project_1_slack_metric"
+    And I should see "0.22" within "#project_2_slack_metric"

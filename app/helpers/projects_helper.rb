@@ -11,4 +11,8 @@ module ProjectsHelper
   def is_selected_metric? sample
     sample.try(:metric_name) != nil && (current_user.preferred_metrics.include? sample.metric_name)
   end
+
+  def metric_content_class_label sample
+    "metric-content " + (sample.created_at >= Date.today ? "" : "outdated-metric")
+  end
 end

@@ -2,6 +2,31 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.outdated-metric {
+	opacity: 0.3;
+}
+
+.ui-slider-handle {
+	outline: none;
+}
+
+.slider-container {
+	position: relative;
+	width: 100%;
+	padding: 5px 0px;
+}
+
+#slider-progress-indicator {
+	display: none;
+	position: absolute;
+
+}
+
+.slider-error-msg {
+	color: red;
+}
+
+
 #gap{
   	padding-bottom: 14px;
 }
