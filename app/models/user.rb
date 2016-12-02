@@ -4,7 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  provider_username      :string           default(""), not null
-#  email                  :string           default(""), not null
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
@@ -18,7 +18,7 @@
 #  updated_at             :datetime         not null
 #  provider               :string
 #  uid                    :string
-#  role                   :string           default("coach"), not null
+#  role                   :string           default("student"), not null
 #  preferred_metrics      :text
 #
 
@@ -31,11 +31,15 @@ class User < ActiveRecord::Base
   serialize :preferred_metrics, Array
 
   has_and_belongs_to_many :selected_projects, :foreign_key => "user_id", :class_name => "Project"
+  has_many :ownerships
+  has_many :owned_projects, :class_name => "Project", :through => :ownerships, :source => :project
+
 
   after_initialize :set_default_preferred_metrics
 
   ADMIN = "admin"
-  COACH = "coach"
+  INSTRUCTOR = "instructor"
+  STUDENT = "student"
 
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
@@ -59,6 +63,14 @@ class User < ActiveRecord::Base
   	self.role == ADMIN
   end
 
+  def is_student?
+    self.role == STUDENT
+  end
+
+  def is_instructor?
+    self.role == INSTRUCTOR
+  end
+
   def preferred_projects
     self.selected_projects = Project.all if self.selected_projects.empty?
     self.selected_projects
@@ -66,6 +78,10 @@ class User < ActiveRecord::Base
 
   def preferred_projects= projects
     self.selected_projects = projects
+  end
+
+  def is_owner_of? project
+    self.owned_projects.include? project
   end
 
   private

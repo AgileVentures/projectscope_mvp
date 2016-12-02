@@ -74,6 +74,10 @@ And(/^I am logged in$/) do
   sleep(1)
 end
 
+Given /^user with username "(.*)" exists/ do |name|
+  User.create :provider_username => name, :password => Devise.friendly_token[0,20]
+end
+
 Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|
   expect(page.body).not_to match value
 end

@@ -12,8 +12,9 @@
 class Project < ActiveRecord::Base
   has_many :configs
   has_many :metric_samples
-
   has_and_belongs_to_many :users
+  has_many :ownerships
+  has_many :owners, :class_name => "User", :through => :ownerships, :source => :user
 
   validates :name, :presence => true, :uniqueness => true
 
