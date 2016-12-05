@@ -8,7 +8,7 @@
     %tr
       %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name"
       - @metric_names.each do |metric_name|
-        %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name
+        %th{:class => @class}= link_to metric_name.humanize, projects_path(:type => metric_name), :id => metric_name
   
   %tbody
     - @projects.each do |project|
