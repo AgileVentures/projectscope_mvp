@@ -1,16 +1,19 @@
 %h1 Preference Settings
+%div
+	= check_box_tag "check_all", 0, true
+	= label_tag "check_all", "Check all"
 = form_tag user_path, :method => :put do
 	%div#project-preference-list
 		%h4 Check projects to monitor:
 		- @all_projects.each do |project|
 			%div
-				= check_box_tag "projects[#{project.id}]", 0, (@preferred_projects.include? project)
+				= check_box_tag "projects[#{project.id}]", 0, (@preferred_projects.include? project), :class => "project_checkbox"
 				= label_tag "projects_#{project.id}", project.name
 	%div#metric-preference-list
 		%h4 Check Metrics to monitor:
 		- @all_metrics.each do |metric|
 			%div
-				= check_box_tag "metrics[#{metric}]", 0, (@preferred_metrics.include? metric)
+				= check_box_tag "metrics[#{metric}]", 0, (@preferred_metrics.include? metric), :class => "metric_checkbox"
 				= label_tag "metrics_#{metric}", metric.camelcase
 	%br
 	= submit_tag "Save", :id => "project_preference_submit", :class => "btn btn-default"
