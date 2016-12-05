@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
 
   ADMIN = "admin"
   COACH = "coach"
+  STUDENT = "student"
 
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
@@ -57,6 +58,11 @@ class User < ActiveRecord::Base
 
   def is_admin?
   	self.role == ADMIN
+  end
+
+  def change_role(role)
+    self.role = role
+    self.save!
   end
 
   def preferred_projects

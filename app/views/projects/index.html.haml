@@ -20,6 +20,17 @@
               = '%.2f'.try(:%,sample.try(:score) || 0.0)
               #{raw sample.try(:image)}
 
-%br/
+-unless current_user.role.eql?("coach") or current_user.role.eql?("admin")
+  %br/
 
-= link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+  = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+
+-else
+  %br/
+
+  = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
+
+  %br/
+
+  = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+

@@ -79,4 +79,10 @@ ActiveRecord::Schema.define(version: 20161101210440) do
   add_index "users", ["provider_username"], name: "index_users_on_provider_username", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
+  create_table "whitelists", force: :cascade do |t|
+    t.string "username"
+  end
+
+  add_index "whitelists", ["username"], name: "index_whitelists_on_username"
+
 end

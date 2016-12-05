@@ -56,6 +56,7 @@ Given(/^A project update job has been run$/) do
 end
 
 And(/^I am logged in$/) do
+  Whitelist.create :username => "test-coach"
   visit path_to("the login page")
   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
     {

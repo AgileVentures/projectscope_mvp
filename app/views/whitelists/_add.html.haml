@@ -1,0 +1,5 @@
+= form_tag whitelists_path do
+  = field_set_tag do
+    = label_tag :username, 'GitHub username'
+    = text_field_tag :username
+    = submit_tag 'Add'

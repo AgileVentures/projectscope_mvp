@@ -21,6 +21,10 @@ module NavigationHelpers
         "/projects/#{Project.find_by(name: $1).id}/edit"
       when /^the login page/ then
         '/users/sign_in'
+      when /^the whitelist page/ then
+        '/whitelists'
+      when /^the whitelist management page/ then
+        '/whitelists/new'
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #
