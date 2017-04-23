@@ -76,4 +76,5 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  ENV['attr_encrypted_key'] = '123456789012345678901234567890123456789012345678901234567890'
 end

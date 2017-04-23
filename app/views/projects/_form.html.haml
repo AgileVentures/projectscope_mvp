@@ -14,7 +14,7 @@
     = f.text_field :name, :disabled => @readonly
 
   = f.fields_for :configs do |cf|
-    - name,index  = cf.object.metric_name, cf.index
+    - name,klass,index  = cf.object.metric_name, cf.object.klass, cf.index
     %fieldset{:id => name}
       %legend= name.titleize
       = hidden_field_tag "project[configs_attributes][#{index}][metric_name]", name
@@ -24,15 +24,24 @@
         = text_field_tag field_name, val, :disabled => @readonly
         %br
       - unless @readonly
-        = link_to 'Add new', '', :class => 'add'
-        .field.new
-          = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => nil, :class => 'newf'
-          \ :
-          = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => nil, :class => 'newf'
-          %br
+        - if klass.respond_to? :credentials
+          - klass.credentials.each do |cred|
+            -unless @existed_configs[name].include?(cred)
+              .field.new
+                = label_tag "project[configs_attributes][#{index}][new][]", "#{cred}", :id => nil, :class => 'newf'
+                \ :
+                = hidden_field_tag "project[configs_attributes][#{index}][new][]", "#{cred}", :id => nil, :class => 'newf'
+                = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => "#{name}_#{cred}", :class => 'newf'
+        - else
+          = link_to 'Add new', '', :class => 'add'
+          .field.new
+            = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => nil, :class => 'newf'
+            \ :
+            = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => nil, :class => 'newf'
+            %br
 
-      :javascript
-        $('.add').click(function() { $(this).closest('fieldset').append($('.new')[0].outerHTML); return(false); } )
+        :javascript
+          $('.add').click(function() { $(this).closest('fieldset').append($('.new')[0].outerHTML); return(false); } )
 
   - unless @readonly
     .actions

@@ -4,11 +4,16 @@ ruby '2.3.1'
 
 # Gems for metrics to use
 gem 'project_metrics', git: 'https://github.com/AgileVentures/ProjectMetrics/'
-gem 'project_metric_code_climate', git: 'https://github.com/AgileVentures/project_metric_code_climate'
-gem 'project_metric_github', git: 'https://github.com/AgileVentures/project_metric_github'
-gem 'project_metric_slack', git: 'https://github.com/AgileVentures/project_metric_slack'
-gem 'project_metric_pivotal_tracker', git: 'https://github.com/AgileVentures/project_metric_pivotal_tracker'
-gem 'project_metric_slack_trends', git: 'https://github.com/AgileVentures/project_metric_slack_trends'
+gem 'project_metric_code_climate', git: 'https://github.com/an-ju/project_metric_code_climate'
+# gem 'project_metric_github', git: 'https://github.com/AgileVentures/project_metric_github'
+gem 'project_metric_slack', git: 'https://github.com/an-ju/project_metric_slack'
+# gem 'project_metric_pivotal_tracker', git: 'https://github.com/AgileVentures/project_metric_pivotal_tracker'
+gem 'project_metric_slack_trends', git: 'https://github.com/an-ju/project_metric_slack_trends'
+gem 'project_metric_github', git: 'https://github.com/an-ju/project_metric_github'
+gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker'
+gem 'project_metric_story_transition', git: 'https://github.com/an-ju/project_metric_story_transitions'
+
+gem 'highcharts-rails'
 
 # use Rails 3-style protected attributes rather than strong params
 gem 'protected_attributes'
@@ -49,9 +54,14 @@ gem 'timecop'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'json'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "font-awesome-rails"
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
+gem 'sprockets-rails', '~> 3.1.1'
 
 group :development, :test do
   gem 'sqlite3'
@@ -61,6 +71,8 @@ group :development, :test do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "jasmine"
+  gem 'jasmine-jquery-rails'
 end
 
 group :test do
@@ -75,7 +87,6 @@ group :test do
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'vcr'
   gem 'webmock'
-  gem 'launchy'
   gem 'codeclimate-test-reporter', require: nil
 end
 
@@ -88,4 +99,3 @@ group :production do
   gem 'rails_12factor'
   gem 'pg'
 end
-

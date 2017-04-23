@@ -1,0 +1,37 @@
+#projectlist_new {
+    border-collapse: collapse;
+    width: 100%;
+    margin-right: auto;
+}
+
+#projectlist_new td, #projectlist_new th {
+    border: 3px solid #ddd;
+    padding: 8px;
+}
+
+#projectlist_new tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#projectlist_new tr {
+   text-align: left;
+   width: 16%;
+}
+
+#projectlist_new {
+    border-collapse: collapse;
+    margin-right: auto;
+}
+
+.chart_place {
+  width: 250px;
+  margin: auto;
+  max-height: 500px;
+}
+
+
+//#projectlist_new .metric_list th, #projectlist_new .metric_list td {
+//    border: 1px solid #ddd;
+//    width: 200px;
+//    max-width: 200px;
+//}

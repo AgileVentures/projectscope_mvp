@@ -1,25 +1,47 @@
 %h3#gap Project List
 
-
-#gap= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
-
-%table#projectlist
-  %thead
-    %tr
-      %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name"
-      - @metric_names.each do |metric_name|
-        %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name
-  
-  %tbody
-    - @projects.each do |project|
-      %tr
-        %td= link_to project.name, project
-        - project.latest_metric_samples.each do |sample|
-          - if is_selected_metric? sample
-            %td{:id => "#{project.name}_#{sample.try(:metric_name)}_metric"}
-              = '%.2f'.try(:%,sample.try(:score) || 0.0)
-              #{raw sample.try(:image)}
-
+%div.slider-container
+  %div
+    Current date:
+    = fa_icon "angle-left", :class => "btn btn-default btn-sm date-nav", :id => "day-before"
+    %strong{:id => "date-label"}= Date.today.to_s
+    = fa_icon "angle-right", :class => "btn btn-default btn-sm date-nav", :id => "day-after"
+  %br/
+  %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+  %div#slider-progress-indicator
+    Loading...
 %br/
 
-= link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+%div{:class => 'col-md-2'}
+%div{:class => 'col-md-8'}
+  %table#projectlist{:class => 'table'}
+    %thead
+      %tr
+        %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
+        - @metric_names.each do |metric_name|
+          %th{:class => @class}= link_to metric_name.humanize, projects_path(:type => metric_name), :id => metric_name, :method => :get
+
+    %tbody
+      - @projects.each do |project|
+        %tr
+          %td= link_to project.name, project
+          - project.latest_metric_samples.each do |sample|
+            - if is_selected_metric? sample
+              %td{:id => "project_#{project.id}_#{sample.try(:metric_name)}_metric", :class => metric_content_class_label(sample), :style=>"height:100%;"}
+                %div{:style=>"position:relative;height:120px; margin:0; padding:0;"}
+                  %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
+                  %span{:class => "metric_image"}#{raw sample.try(:image)}
+                  %p.expand_button{:style => "position:absolute;bottom:0px; right:0px;margin:0; padding:0;"}
+                    =link_to 'expand', project, :id => "project_#{project.id}_#{sample.try(:metric_name)}_metric_expand", :class => "expand_link", :proj_id => project.id, :metric => sample.try(:metric_name)
+%div{:class => 'col-md-2'}
+
+-unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
+  %div
+    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+
+-else
+  %div{:class => 'col-md-12'}
+    = link_to 'Update All Projects', update_all_projects_path, :class => 'btn btn-primary'
+    = link_to 'Privilege Control', whitelists_path, :class => 'btn btn-primary'
+    = link_to 'Create New Project', new_project_path, :class => 'btn btn-primary'
+    = link_to 'Preference', user_path(current_user), :class => 'btn btn-primary'

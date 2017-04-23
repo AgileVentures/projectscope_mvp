@@ -1,0 +1,12 @@
+%a{:id=>"closeLink", :href=>"#", :style=>"position: static;"}
+  close
+%br
+- project = @project
+- metric = @metric
+-# = days_from_now = @days_from_now
+-# = days_from_now
+- project.latest_metric_samples.each do |sample|
+  - if (is_selected_metric? sample) && (sample.try(:metric_name) == metric)
+    %div
+      %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
+      %span{:class => "metric_image"}#{raw sample.try(:image)}

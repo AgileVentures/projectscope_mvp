@@ -12,14 +12,21 @@
  *
  */
  /*
+ *= require jquery-ui
  *= require_tree .
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+
+html, body {
+  //position:absolute;
+  margin-left: -150px;
+}
 
 .header-bar {
 	background-color:#337ab7; 
-	padding: 10px 0px; 
+	padding: 10px 0px;
 	color: white; 
 	position: fixed;
 	z-index: 10;

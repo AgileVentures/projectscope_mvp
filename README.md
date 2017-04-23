@@ -39,6 +39,7 @@ run rails console like so:
 
 ```GITHUB_ACCESS_TOKEN=<YOUR_ACCESS_TOKEN> rails c```
 
+
 if you then run
 
 ```Project.all.each &:resample_all_metrics```

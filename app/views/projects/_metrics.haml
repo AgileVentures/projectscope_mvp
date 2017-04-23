@@ -1,0 +1,12 @@
+%td{:valign => "botom", :align => "right"}
+  = link_to project.name, project
+  %button{:class => "expand_button", :pid => "#{project.id}"}
+    = "+"
+- project.latest_metric_samples.each do |sample|
+  %td
+    - if !sample.nil?
+      %p
+        = sample.try(:metric_name).titleize + " " + '%.2f'.try(:%,sample.try(:score) || 0.0)
+      %div.chart_place{:id => "project-#{project.id}-metric-#{sample.try(:metric_name)}"}
+        -# = "PLACEHOLDER"
+        -#%span{:class => "metric_image"}#{raw sample.try(:image)}

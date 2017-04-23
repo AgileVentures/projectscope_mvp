@@ -5,6 +5,7 @@ Feature: GitHub User Login
 
 Scenario: github user login with email
 	Given I am on the login page
+	And "test-coach" is in the whitelist
 	And I have a valid github account with email "test-coach@test.com" username "test-coach"
 	When I follow "Sign in with GitHub"
 	Then I should be on the home page
@@ -12,6 +13,7 @@ Scenario: github user login with email
 
 Scenario: github user login without email
 	Given I am on the login page
+	And "test-coach" is in the whitelist
 	And I have a valid github account with email "" username "test-coach"
 	When I follow "Sign in with GitHub"
 	Then I should be on the home page

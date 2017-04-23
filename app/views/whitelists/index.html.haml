@@ -1,0 +1,50 @@
+:css
+  #Users{
+      border-collapse: collapse;
+      width: 80%;
+      margin-right: auto;
+  }
+  
+  #Users td, #Users th {
+      border: 1px solid #ddd;
+      padding: 8px;
+  }
+  
+  #Users tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #Users tr:hover {background-color: #ddd;}
+  
+  #Users th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #337ab7;
+      color: white;
+  }
+  #Users tr {
+     text-align: left;
+  }
+
+%h1 Privilege Control 
+
+%table#Users
+  %thead
+    %tr
+      %th GitHub Account
+      %th Role
+      %th Action
+
+  %tbody
+    - @permitted_users.each do |user|
+      %tr
+        %td= user.provider_username
+        %td= user.role
+        -if user.role.eql?("instructor")
+          %td= link_to "Downgrade to student", downgrade_user_path(user), :method => :get, :user => user
+        -elsif user.role.eql?("student")
+          %td= link_to "Upgrade to instructor", upgrade_user_path(user), :method => :get, :user => user
+        -else
+          %td
+
+%br/
+= link_to 'Back to project page', projects_url

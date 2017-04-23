@@ -12,15 +12,16 @@
 class Project < ActiveRecord::Base
   has_many :configs
   has_many :metric_samples
-
   has_and_belongs_to_many :users
+  has_many :ownerships
+  has_many :owners, :class_name => "User", :through => :ownerships, :source => :user
 
   validates :name, :presence => true, :uniqueness => true
 
   accepts_nested_attributes_for :configs
   attr_accessible :name, :configs_attributes
 
-  scope :order_by_metric_score, -> (metric_name, order) { 
+  scope :order_by_metric_score, -> (metric_name, order) {
             joins(:metric_samples).where("metric_samples.metric_name = ?", metric_name)
                                   .group(:id)
                                   .having("metric_samples.created_at = MAX(metric_samples.created_at)")
@@ -31,9 +32,24 @@ class Project < ActiveRecord::Base
     configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
   end
 
+  # These two functions need further revisions.
+  def all_metrics
+    valid_configs = MetricSample.all.where(:project_id => id)
+    return [] if valid_configs.nil?
+    metrics_name_ary = []
+    valid_configs.each do |config|
+      metrics_name_ary << config.metric_name
+    end
+    metrics_name_ary.uniq
+  end
+
+  def charts
+    puts "Hallo"
+  end
+
   def latest_metric_samples
     ProjectMetrics.metric_names.map do |metric_name|
-      metric_samples.latest_for(metric_name)
+        metric_samples.latest_for(metric_name)
     end
   end
 
@@ -55,4 +71,16 @@ class Project < ActiveRecord::Base
     end
   end
 
+
+
+  def latest_metrics_on_date projects, preferred_metrics, date
+    projects.collect do |p|
+      p.metric_samples
+       .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",
+                  date.beginning_of_day,
+                  date.end_of_day,
+                  preferred_metrics)
+       .map { |m| p.attributes.merge(m.attributes) }
+    end
+  end
 end

@@ -1,0 +1,42 @@
+%h3#gap Project List Hello World We Are Developing This Page!
+
+%div.slider-container
+  %div
+    Current date:
+    = fa_icon "angle-left", :class => "btn btn-default btn-sm date-nav", :id => "day-before"
+    %strong{:id => "date-label"}= Date.today.to_s
+    = fa_icon "angle-right", :class => "btn btn-default btn-sm date-nav", :id => "day-after"
+  %br/
+  %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+  %div#slider-progress-indicator
+    Loading...
+%br/
+%div{:class => 'col-md-2'}
+%div{:class => 'col-md-8'}
+  %table#projectlist_new{:class => 'table'}
+    %thead
+      %tr
+        %th{:class => @class}
+          = link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
+        - @metric_names.each do |metric_name|
+          %th
+            = metric_name
+    %tbody
+      - @projects.each do |project|
+        %tr
+          = render :partial => 'metrics', :locals => {:project => project}
+        %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
+          %td{:colspan => "2"}
+            = render :partial => 'expanded', :locals => {:project => project}
+%div{:class => 'col-md-2'}
+
+-unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
+  %div
+    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+
+-else
+  %div{:class => 'col-md-12'}
+    = link_to 'Update All Projects', update_all_projects_path, :class => "btn btn-primary"
+    = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
+    = link_to 'Preference', user_path(current_user), :class => "btn btn-primary"
+    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
