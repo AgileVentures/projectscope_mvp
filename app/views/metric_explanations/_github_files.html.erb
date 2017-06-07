@@ -1,0 +1,50 @@
+<strong>What's this?</strong>
+<p>This metric shows the distribution of edited lines of different layers within one week.</p>
+<p>Data is collected from <a href="https://developer.github.com/v3/repos/commits/" target="_blank">GitHub API</a>.</p>
+<strong>How layers are determined?</strong>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Regular Expression</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>model</td>
+      <td>^app/models</td>
+      <td>app/models/mymodel.rb</td>
+    </tr>
+    <tr>
+      <td>controller</td>
+      <td>^app/controllers</td>
+      <td>app/controllers/mymodels_controller.rb</td>
+    </tr>
+    <tr>
+      <td>view</td>
+      <td>^app/views</td>
+      <td>app/views/mymodels/index.html.erb</td>
+    </tr>
+    <tr>
+      <td>view</td>
+      <td>^app/assets</td>
+      <td>app/assets/javascripts/index.js</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>^spec/</td>
+      <td>spec/models/mymodel_spec.rb</td>
+    </tr>
+    <tr>
+      <td>test</td>
+      <td>^features/</td>
+      <td>features/add_new_model.feature</td>
+    </tr>
+    <tr>
+      <td>db</td>
+      <td>^db/</td>
+      <td>db/migrate/1234567890_create_mymodel.rb</td>
+    </tr>
+  </tbody>
+</table>

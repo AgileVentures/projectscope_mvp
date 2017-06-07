@@ -1,0 +1,10 @@
+%td{:valign => "botom", :align => "right"}
+  - if current_user.is_student? and not current_user.is_owner_of? project
+    = project.name
+  - else
+    = link_to project.name, project_path(project.id)
+- project.latest_metric_samples(metric_names).each do |sample|
+  %td
+    - if !sample.nil?
+      %a.detail-link{href:"projects/#{project.id}/metrics/#{sample.metric_name}/detail", style: 'width:100%;height:100%;'}
+        %div.chart_place{:id => "project-#{project.id}-#{@display_type}-#{sample.try(:metric_name)}"}

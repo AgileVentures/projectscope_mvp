@@ -5,17 +5,9 @@ end
 
 When /^I enter new "(.*)" config values/ do |metric, table|
   fieldset_id = metric.downcase.gsub(' ', '_') # "Code Climate" => "code_climate"
-  (table.hashes.length - 1).times do
-    within "##{fieldset_id}" do
-      click_link 'Add new'
-    end
-  end
-  idx = 0
-  all_inputs = page.all("fieldset##{fieldset_id} .newf")
   table.hashes.each do |h|
-    all_inputs[idx].set h['key']
-    all_inputs[idx+1].set h['value']
-    idx += 2
+    credential = h['key']
+    fill_in("#{fieldset_id}_#{credential}", :with => h['value'])
   end
 end
 
@@ -56,6 +48,7 @@ Given(/^A project update job has been run$/) do
 end
 
 And(/^I am logged in$/) do
+  Whitelist.create :username => "test-coach"
   visit path_to("the login page")
   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
     {
@@ -72,6 +65,10 @@ And(/^I am logged in$/) do
     })
   click_link "Sign in with GitHub"
   sleep(1)
+end
+
+Given /^user with username "(.*)" exists/ do |name|
+  User.create :provider_username => name, :password => Devise.friendly_token[0,20]
 end
 
 Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|

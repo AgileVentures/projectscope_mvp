@@ -1,0 +1,36 @@
+%div.col-md-2
+  %div.metric_overview
+    %h4
+      Metric
+    %p
+      %strong
+        = @metric_name.humanize
+    %h4
+      Team
+    %p
+      %strong
+        = @project.name
+    %h4
+      Score Trend
+    %div.chart_place{id: "project-#{@project.id}-series-#{@metric_name}"}
+%div.col-md-8
+  - @comments.each do |mc_pair|
+    %h3
+      = (Date.today-mc_pair.first).strftime('%Y-%m-%d')
+    %div{style: 'text-align:center'}
+      %div.chart_place{id: "project-#{@project.id}-ondate-#{@metric_name}-#{mc_pair.first}"}
+    %br
+    %table.table-striped.table
+      %tbody
+        - mc_pair.last.each do |comment|
+          %tr
+            %td
+              = comment.content
+%div.col-md-2
+  - if can? :create, :comment
+    = render partial: 'comment_form'
+
+:javascript
+  days = #{@days_from_now};
+  parent_metric = {'id': #{@parent_metric.id}, 'metric_name': '#{@parent_metric.metric_name}'};
+  global_project_id = #{@project.id};

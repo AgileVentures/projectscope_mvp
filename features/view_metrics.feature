@@ -26,16 +26,16 @@ Feature: View A Projects Metrics
 
   Scenario: view metric for projects
     When I am on the projects page
-    Then I should see "2.9" within "#LocalSupport_code_climate_metric"
-    And I should see "3.4" within "#WebsiteOne_code_climate_metric"
-    And I should see "0.7" within "#LocalSupport_github_metric"
-    And I should see "0.6" within "#WebsiteOne_github_metric"
+    Then I should see "2.9" within "#project_1_code_climate_metric"
+    And I should see "3.4" within "#project_2_code_climate_metric"
+    And I should see "0.7" within "#project_1_github_metric"
+    And I should see "0.6" within "#project_2_github_metric"
 
   @rake
   Scenario: update metrics for projects
     Given A project update job has been run
     When I am on the projects page
-    Then I should see "3.2" within "#LocalSupport_code_climate_metric"
-    And I should see "3.5" within "#WebsiteOne_code_climate_metric"
-    And I should see "0.64" within "#LocalSupport_github_metric"
-    And I should see "0.28" within "#WebsiteOne_github_metric"
+    Then I should see "3.2" within "#project_1_code_climate_metric"
+    And I should see "3.5" within "#project_2_code_climate_metric"
+    And I should see "0.64" within "#project_1_github_metric"
+    And I should see "0.28" within "#project_2_github_metric"

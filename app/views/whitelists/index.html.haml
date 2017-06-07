@@ -1,0 +1,22 @@
+%h1 Privilege Control
+
+%table.table.table-striped#Users
+  %thead
+    %tr
+      %th GitHub Account
+      %th Role
+      %th Action
+
+  %tbody
+    - @permitted_users.each do |user|
+      %tr
+        %td= user.provider_username
+        %td= user.role
+        -if user.role.eql?("instructor")
+          %td= link_to "Downgrade to student", downgrade_whitelist_path(user), :method => :put, :user => user
+        -elsif user.role.eql?("student")
+          %td= link_to "Upgrade to instructor", upgrade_whitelist_path(user), :method => :put, :user => user
+        -else
+          %td
+
+= link_to 'Back to project page', projects_url

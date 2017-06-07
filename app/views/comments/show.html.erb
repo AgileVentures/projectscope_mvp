@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Metric sample:</strong>
+  <%= @comment.metric_sample %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @comment.user %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @comment.ctype %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @comment.content %>
+</p>
+
+<p>
+  <strong>Params:</strong>
+  <%= @comment.params %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @comment.created_at %>
+</p>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

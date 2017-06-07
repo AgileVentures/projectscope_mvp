@@ -1,0 +1,13 @@
+{
+  "chartType":"tracker_velocity",
+  "titleText":"Tracker Velocity",
+  "data": {
+    "unscheduled": "0.0",
+    "unstarted": "0.0",
+    "started": "0.0",
+    "finished": "0.0",
+    "delivered": "0.0",
+    "accepted": "0.0",
+    "rejected": "0.0"
+  }
+}

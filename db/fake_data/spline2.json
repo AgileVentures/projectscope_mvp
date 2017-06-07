@@ -1,0 +1,9 @@
+{
+  "chartType" : "spline",
+  "titleText" : "Bar",
+  "subtitleText" : "",
+  "xAxisTitleText" : "",
+  "yAxisTitleText" : "",
+  "data" : [[0, 8], [1, 1], [2, 5], [3, 1], [4, 0],
+    [5, 7], [6, 3], [7, 6], [8, 7]]
+}

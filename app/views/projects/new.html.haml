@@ -1,0 +1,32 @@
+%h1
+  New Project
+
+= form_for @project do |f|
+  %div.panel.panel-default
+    %div.panel-heading
+      %label
+        = "Basic Info"
+    %div.panel-body
+      %div.input-group
+        %div.input-group-addon
+          = "Project Name:"
+        %input{:type => "text", :name => "project[name]", :class => "form-control", :value => @project.name}
+      %div.input-group
+        %div.input-group-addon
+          = "Project Owner:"
+        %input{:type => "text", :name => "project[user_id]", :class => "form-control"}
+  %div{:class => "panel panel-default"}
+    %div.panel-heading
+      %label
+        Metric Params
+    %div.panel-body
+      - @credentials.each_pair do |website, params|
+        %h4
+          = website.to_s.titleize
+        - params.each do |param|
+          %div.input-group
+            %div.input-group-addon
+              = param.to_s.split('_')[1..-1].join('_').titleize
+            %input{:type => "text", :name => "project[configs][#{param}]", :class => "form-control"}
+  = submit_tag "Create", class: "btn btn-primary"
+= link_to 'Back', projects_path

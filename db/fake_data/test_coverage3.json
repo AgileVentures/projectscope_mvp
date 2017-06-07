@@ -1,0 +1,9 @@
+{
+  "chartType":"test_coverage",
+  "titleText":"Test Coverage",
+  "data": {
+    "GPA": "3.5",
+    "issues": "38",
+    "coverage": "88"
+  }
+}

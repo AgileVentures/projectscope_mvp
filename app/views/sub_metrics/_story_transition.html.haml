@@ -1,0 +1,43 @@
+%h4#story_transition
+  Story Transitions
+  %button.btn.btn-default{type: 'button', 'data-toggle':'modal', 'data-target': '#m-story-transition'}
+    %span.glyphicon.glyphicon-question-sign
+    %span
+      what's this?
+%div.chart_place{:id => "project-#{project.id}-metric-story_transition"}
+
+%div#m-story-transition.modal.fade{tabindex: "-1", role: "dialog", 'aria-labelledby': "myModalLabel"}
+  %div.modal-dialog{role: "document"}
+    %div.modal-content
+      %div.modal-header
+        %button.close{type:"button", 'data-dismiss': "modal", 'aria-label': "Close"}
+          %span{'aria-hidden': "true"}
+          Close
+        %h4.modal-title#myModalLabel
+          Story Lifecycle
+      %div.modal-body
+        %h5
+          Explanations
+        %div
+          = image_tag 'story_transition1.png', width: '100%'
+        %h5
+          A Good Practice
+        %p
+          Story lifecycles make sense, "delivered" stories are actually deployed, and "accepted" stories are those where customer feedback indicates story is OK as delivered.
+        %div
+          = image_tag 'story_transition2.png', width: '100%'
+        %h5
+          Bad Practice: missing phase
+        %p
+          Stories don't go through a reasonable lifecycle. No clear demarcation between "finished" (story checked in) and "delivered" (deployment).
+        %div
+          = image_tag 'story_transition3.png', width: '100%'
+        %h5
+          Bad Practice: change all stories at the same time
+        %p
+          Tracker used as a to-do list. Stories states are not updated at real-time.
+        %div
+          = image_tag 'story_transition4.png', width: '100%'
+      %div.modal-footer
+        %button.btn.btn-default{type: "button", 'data-dismiss': "modal"}
+          Close

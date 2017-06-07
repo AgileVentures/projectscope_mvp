@@ -1,0 +1,12 @@
+{
+  "chartType":"github_files",
+  "titleText":"GitHub file distributions",
+  "data": {
+    "model": "100",
+    "view": "234",
+    "controller": "130",
+    "test": "450",
+    "db": "40",
+    "other": "230"
+  }
+}

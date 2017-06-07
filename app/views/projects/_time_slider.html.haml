@@ -1,0 +1,10 @@
+%div.slider-container.col-md-12
+  %div
+    Current date:
+    = fa_icon "angle-left", :class => "btn btn-default btn-sm date-nav", :id => "day-before"
+    %strong{:id => "date-label"}= Date.today.to_s
+    = fa_icon "angle-right", :class => "btn btn-default btn-sm date-nav", :id => "day-after"
+  %br/
+  %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+  %div#slider-progress-indicator
+    Loading...
