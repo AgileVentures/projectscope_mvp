@@ -1,7 +1,32 @@
-%h1 Editing #{@project.name}
+%h1 Editing Project Config
 
-= render 'form'
-
-- if @readonly
-  = link_to 'Edit', edit_project_path(@project)
-= link_to 'Back', projects_path
+= form_for @project do |f|
+  %div.panel.panel-default
+    %div.panel-heading
+      %label
+        = "Basic Info"
+    %div.panel-body
+      %div.input-group
+        %div.input-group-addon
+          = "Project Name:"
+        %input{:type => "text", :name => "project[name]", :class => "form-control", :value => @project.name}
+      %div.input-group
+        %div.input-group-addon
+          = "Project Owner:"
+        %input{:type => "text", :name => "project[user_id]", :class => "form-control"}
+  %div{:class => "panel panel-default"}
+    %div.panel-heading
+      %label
+        = "Monitered Metrics"
+    %div.panel-body
+      - @configs.each do |metric_name, metric_params|
+        %h4
+          = metric_name.titleize
+        - metric_params.each do |param|
+          - param.each do |name, value|
+            %div.input-group
+              %div.input-group-addon
+                = name + ":"
+              %input{:type => "text", value: name.include?('token') ? '' : value,  :name => "project[configs][#{metric_name}][#{name}]", :class => "form-control"}
+  = submit_tag "Finish", class: "btn btn-primary"
+  = link_to 'Back', projects_path, class: "btn btn-primary"

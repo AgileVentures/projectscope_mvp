@@ -1,0 +1,9 @@
+{
+  "chartType":"travis_ci",
+  "titleText":"Travis CI builds",
+  "data": {
+    "total_builds": "20",
+    "success_builds": "15",
+    "current_state": "passed"
+  }
+}

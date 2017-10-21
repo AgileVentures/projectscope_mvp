@@ -1,22 +1,9 @@
-Main Repo Status:
-
-<a href="https://codeclimate.com/github/AgileVentures/projectscope"><img src="https://codeclimate.com/github/AgileVentures/projectscope/badges/gpa.svg" /></a>
-<a href="https://travis-ci.org/AgileVentures/projectscope"><img src="https://travis-ci.org/AgileVentures/projectscope.svg?branch=develop"></a>
-
-CS169 Group Forked Repo Status:
-
-<a href="https://codeclimate.com/github/DrakeW/projectscope"><img src="https://codeclimate.com/github/DrakeW/projectscope/badges/gpa.svg" /></a>
-<a href="https://travis-ci.org/DrakeW/projectscope"><img src="https://travis-ci.org/DrakeW/projectscope.svg?branch=develop"></a>
-<a href="https://codeclimate.com/github/DrakeW/projectscope/coverage"><img src="https://codeclimate.com/github/DrakeW/projectscope/badges/coverage.svg" /></a>
-
-Pivotal Tracker: https://www.pivotaltracker.com/n/projects/1886749
-
 # MVP dashboard for ProjectScope
 
 A dashboard to show project metrics such as those supported by gems like
-[project_metric_code_climate](https://github.com/AgileVentures/project_metric_code_climate),
-[project_metric_github](https://github.com/AgileVentures/project_metric_github),
-and others, using the [project_metrics](https://github.com/AgileVentures/project_metrics) gem to wrap
+[project_metric_code_climate](https://github.com/an-ju/project_metric_code_climate),
+[project_metric_github](https://github.com/an-ju/project_metric_github),
+and others, using the [project_metrics](https://github.com/an-ju/project_metrics) gem to wrap
 them for consumption by a Rails app
 
 Standing up an instance
@@ -38,6 +25,7 @@ specifying the github url for the project.  In order to generate sample metrics 
 run rails console like so:
 
 ```GITHUB_ACCESS_TOKEN=<YOUR_ACCESS_TOKEN> rails c```
+
 
 if you then run
 
@@ -71,13 +59,3 @@ Each metric gem *must* provide the following methods:
 - https://css-tricks.com/how-to-make-charts-with-svg/
 
 If the metric gem provides the class method `credentials`, it should return a list of strings that are the names of the configuration variables the gem expects to find in the `credentials` hash passed to it.  Note that these are configuration variables for an _instance_ of the metric, for example, the GitHub or PivotalTracker token to access a particular private repo or account.  (Application-wide configuration variables are handled separately.)
-
-TODO
-----
-
-* [ ] should we be passing global project tokens via project metric settings? (github gem relying on ENV var)
-* [ ] get versions of the gems stored in db for future reference?
-* [ ] get JSON API set up so that other services can consume our data
-* [ ] get some sad path testing in place
-* [ ] get some rspecs on the individual models?
-* [ ] make cukes higher

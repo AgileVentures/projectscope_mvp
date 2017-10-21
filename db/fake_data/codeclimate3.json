@@ -1,0 +1,9 @@
+{
+  "chartType":"code_climate",
+  "titleText":"Code Climate GPA",
+  "data": {
+    "GPA": "3.5",
+    "issues": "38",
+    "coverage": "88"
+  }
+}

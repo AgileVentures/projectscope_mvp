@@ -1,0 +1,8 @@
+{
+  "chartType":"smart_story",
+  "titleText":"Story Descriptions",
+  "data": {
+    "smart_stories": [{"title": "title1", "description": "description1", "id": "1"}, {"title": "title2", "description": "description2", "id": "2"}],
+    "non_smart_stories": [{"title": "title3", "description": "description3", "id": "3"}]
+  }
+}

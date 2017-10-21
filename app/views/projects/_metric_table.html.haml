@@ -1,0 +1,33 @@
+%div.col-md-12
+  %table#projectlist_new{:class => 'table table-bordered'}
+    %thead
+      %tr
+        %th
+          Team Name
+        - metric_names.each do |metric_name|
+          %th
+            = METRIC_NAMES[metric_name]
+            %span.glyphicon.glyphicon-question-sign{type: 'button', 'data-toggle': 'modal', 'data-target': "##{metric_name}_explanation"}
+
+    %tbody
+      - projects.each do |project|
+        %tr{:align => 'center'}
+          = render :partial => 'metrics',
+                   :locals => { :project => project,
+                                :metric_names => metric_names }
+
+- metric_names.each do |metric_name|
+  %div.modal.fade{id: "#{metric_name}_explanation", tabindex: '-1', role: 'dialog', 'aria-labelledby': "#{metric_name}_label"}
+    %div.modal-dialog{role: 'document'}
+      %div.modal-content
+        %div.modal-header
+          %button.close{type: 'button', 'data-dismiss': 'modal', 'aria-label': 'Close'}
+            %span{'aria-hidden': 'true'}
+              Close
+          %h4.modal-title{id: "#{metric_name}_label"}
+            = METRIC_NAMES[metric_name]
+        %div.modal-body
+          = render partial: "metric_explanations/#{metric_name}"
+        %div.modal-footer
+          %button.btn.btn-default{type: 'button', 'data-dismiss': 'modal'}
+            Close

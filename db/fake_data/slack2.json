@@ -1,0 +1,8 @@
+{
+  "chartType":"slack",
+  "titleText":"Slack Distribution",
+  "data": {
+    "data": ["0", "20", "30", "0"],
+    "series": ["an-ju", "carinaboo", "hezheng.yin", "stevenwu"]
+  }
+}

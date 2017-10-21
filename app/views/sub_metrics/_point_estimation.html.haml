@@ -1,0 +1,27 @@
+%h4#point_estimation
+  Point estimation
+  %button.btn.btn-default{type: 'button', 'data-toggle':'modal', 'data-target': '#m-point-estimation'}
+    %span.glyphicon.glyphicon-question-sign
+    %span
+      what's this?
+%div.chart_place{:id => "project-#{project.id}-metric-point_estimation"}
+
+%div#m-point-estimation.modal.fade{tabindex: "-1", role: "dialog", 'aria-labelledby': "myModalLabel"}
+  %div.modal-dialog{role: "document"}
+    %div.modal-content
+      %div.modal-header
+        %button.close{type:"button", 'data-dismiss': "modal", 'aria-label': "Close"}
+          %span{'aria-hidden': "true"}
+          Close
+        %h4.modal-title#myModalLabel
+          Point Estimation
+      %div.modal-body
+        %h5
+          Explanations
+        %h5
+          A Good Practice
+        %h5
+          Bad Practice: Unproportional estimation
+      %div.modal-footer
+        %button.btn.btn-default{type: "button", 'data-dismiss': "modal"}
+          Close

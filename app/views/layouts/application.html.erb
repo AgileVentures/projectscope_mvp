@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Projectscope</title>
+  <title>Teamscope</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body data-spy="scroll" data-target="#navbar">
 	<div class="col-md-12 header-bar">
-		<div class="col-md-9">		
-			<h4>Welcome to ProjectScope</h4>
-		</div>
+    <% if defined? @sub_metrics %>
+  		<div class="col-md-9">
+        <h4>
+          <%= "Project #{@project.id}" %>
+        </h4>
+      </div>
+    <% else %>
+      <div class="col-md-9">
+        <h4><%= link_to 'Welcome to Teamscope', projects_path, style: 'color:white' %></h4>
+      </div>
+    <% end %>
 		<div class="col-md-3" style="text-align: right;">
 			<% if user_signed_in? %>
-				<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "btn btn-md btn-default") %> 
+				<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "btn btn-md btn-default") %>
 			<% end %>
 		</div>
 	</div>
-	<div class="container" style="padding-top: 60px;">
+	<div class="ps_container" style="padding-top: 60px;">
 		<br>
 
 		<div class="row">
@@ -37,4 +45,3 @@
 	</div>
 </body>
 </html>
-    

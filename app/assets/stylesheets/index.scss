@@ -1,0 +1,35 @@
+#projectlist_new {
+    width: 100%;
+}
+
+#projectlist_new .chart_place {
+  height: 100%;
+  width: 100%;
+}
+
+#projectlist_new .sub_chart_place {
+  width: 810px;
+  height: 600px;
+  overflow: auto;
+}
+
+.ps_container{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.valueline {
+  stroke: steelblue;
+  stroke-width: 5;
+  fill: none;
+}
+
+.d3-tip {
+  line-height: 1;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+}

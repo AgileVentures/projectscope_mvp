@@ -1,0 +1,8 @@
+{
+  "chartType":"point_distribution",
+  "titleText":"Point distribution among users",
+  "data": {
+    "data": ["0", "20", "30", "10", "4", "2", "0"],
+    "series": ["2017519", "2017520", "2017521", "2017522", "2017523", "2017524", "2017525"]
+  }
+}

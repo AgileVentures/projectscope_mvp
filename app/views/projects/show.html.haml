@@ -1,11 +1,78 @@
-%p
-  %strong Name:
-  = @project.name
+%div.col-md-6
+  %h1
+    = @project.name
+%div.col-md-6{style: 'text-align:right'}
+  %div.btn-group{role: 'group'}
+    = link_to 'Config', edit_project_path(@project), class: 'btn btn-default', role: 'button'
 
-%p
-  %strong Config:
-  = render :partial => 'config', :collection => @project.configs
+= render partial: 'time_slider'
 
-= link_to 'Edit', edit_project_path(@project) 
-= " | "
-= link_to 'Back', projects_path
+%div.col-md-6
+  %h2
+    Comments
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          Comment
+        %th
+          Metric
+        %th
+          Operation
+    %tbody
+      - @project.comments.select(&:unread?).each do |cmnt|
+        - sample = cmnt.metric_sample
+        %tr{id: "comment_#{cmnt.id}"}
+          %td
+            = cmnt.content
+          %td{style: 'text-align: center'}
+            %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}-#{cmnt.id}"}
+          %td.btn-default.btn.btn-sm{onclick: "read_comment(#{cmnt.id})"}
+            Mark as read
+- metric_names = ProjectMetrics.hierarchies :metric
+%div.col-md-6
+  %h2
+    Metrics
+  %table.table.table-striped
+    %tbody
+      - metric_names.each do |page|
+        - @project.latest_metric_samples(page).each do |sample|
+          - unless sample.nil?
+            %tr
+              %td
+                %a.detail-link{href:"/projects/#{@project.id}/metrics/#{sample.metric_name}/detail", style: 'width:100%;height:100%;'}
+                  = METRIC_NAMES[sample.metric_name.to_sym]
+                  %span.badge
+                    = sample.comments.length
+              %td{style: 'text-align: center'}
+                %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}
+              %td{style: 'text-align: center'}
+                %div.chart_place{id: "project-#{@project.id}-series-#{sample.try(:metric_name)}"}
+
+%div.col-md-12
+  %div.col-md-6
+    %h2
+      Other Teams
+    - if @display_type.eql? 'metric'
+      = link_to 'switch to time view', project_path(@project, page: @current_page+1, type: 'series')
+    - else
+      = link_to 'switch to metric view', project_path(@project, page: @current_page+1, type: 'metric')
+  %div.col-md-6
+    %nav{style: 'float: right'}
+      %ul.pagination
+        - metric_names.each_with_index do |m, index|
+          - if index == @current_page
+            %li.active
+              %a{href: project_path(@project, page: index+1, type: @display_type)}
+                = index + 1
+          - else
+            %li
+              %a{href: project_path(@project, page: index+1, type: @display_type)}
+                = index + 1
+
+= render :partial => 'metric_table',
+         :locals => { metric_names: metric_names[@current_page],
+                      projects: Project.all.reject { |p| p.id == @project.id } }
+
+:javascript
+  keep_log=true;

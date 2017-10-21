@@ -1,0 +1,8 @@
+{
+  "chartType":"story_overall_v2",
+  "titleText":"Status of Stories",
+  "data": {
+    "data":["2", "3", "5", "10", "4", "0", "12"],
+    "series":["unscheduled", "unstarted", "started", "finished", "delivered", "rejected", "accepted"]
+  }
+}

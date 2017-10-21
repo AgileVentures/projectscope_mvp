@@ -1,0 +1,8 @@
+{
+  "chartType":"point_distribution_v2",
+  "textTitle":"Point Distribution",
+  "data":{
+    "data": [9, 14, 7, 6, 5],
+    "series": ["user1", "user2", "user3", "user4", "user5"]
+  }
+}
