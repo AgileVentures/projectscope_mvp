@@ -1,0 +1,11 @@
+%td{:valign => "botom", :align => "right"}
+  - if can? :read, project
+    = link_to project.name, project_path(project.id)
+  - else
+    = project.name
+- metric_names.each do |metric_name|
+  %td
+    %a.detail-link{href:"/projects/#{project.id}/metrics/#{metric_name}/detail", style: 'width:100%;height:100%;'}
+      %div.chart_place{id: "project-#{project.id}-#{@display_type}-#{metric_name}",
+                       d: "#{project.metric_on_date(metric_name, Date.today - @days_from_now.days).last.to_json}",
+                       s: "#{project.metric_series(metric_name, Date.today - @days_from_now.days).to_json}"}

@@ -50,8 +50,14 @@ When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-When /^(?:|I )press "([^"]*)"$/ do |button|
-  click_button(button)
+When /^(?:|I )press "([^\"]*)"(?: within "([^\"]*)")?$/ do |button, selector|
+  with_scope(selector) do
+    begin
+      click_button(button)
+    rescue Capybara::ElementNotFound
+      click_button(button, :disabled => true)
+    end
+  end
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
@@ -231,7 +237,7 @@ end
 Then /^(?:|I )should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).path
   if current_path.respond_to? :should
-    current_path.should == path_to(page_name)
+    expect(current_path).to eql(path_to(page_name))
   else
     assert_equal path_to(page_name), current_path
   end
@@ -241,8 +247,7 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
   query = URI.parse(current_url).query
   actual_params = query ? CGI.parse(query) : {}
   expected_params = {}
-  expected_pairs.rows_hash.each_pair{|k,v| expected_params[k] = v.split(',')} 
-  
+  expected_pairs.rows_hash.each_pair{ |k,v| expected_params[k] = v.split(',') }
   if actual_params.respond_to? :should
     actual_params.should == expected_params
   else

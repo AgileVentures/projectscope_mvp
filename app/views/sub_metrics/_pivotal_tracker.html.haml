@@ -1,0 +1,25 @@
+%h4#pivotal_tracker
+  Story Lists
+  %button.btn.btn-default{type: 'button', 'data-toggle':'modal', 'data-target': '#m-pivotal_tracker'}
+    %span.glyphicon.glyphicon-question-sign
+    %span
+      what's this?
+%div.chart_place{:id => "project-#{project.id}-metric-pivotal_tracker"}
+
+%div#m-pivotal_tracker.modal.fade{tabindex: "-1", role: "dialog", 'aria-labelledby': "myModalLabel"}
+  %div.modal-dialog{role: "document"}
+    %div.modal-content
+      %div.modal-header
+        %button.close{type:"button", 'data-dismiss': "modal", 'aria-label': "Close"}
+          %span{'aria-hidden': "true"}
+          Close
+        %h4.modal-title#myModalLabel
+          Stories
+      %div.modal-body
+        %h5
+          Definition of Story
+        %h5
+          "SMART"
+      %div.modal-footer
+        %button.btn.btn-default{type: "button", 'data-dismiss': "modal"}
+          Close

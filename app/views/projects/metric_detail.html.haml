@@ -1,0 +1,41 @@
+%div.col-md-2
+  %div.metric_overview
+    %h4
+      Metric
+    %p
+      %strong
+        = METRIC_NAMES[@metric_name.to_sym]
+    %h4
+      Team
+    %p
+      %strong
+        = link_to @project.name, project_path(@project.id)
+    %h4
+      Score Trend
+    %div.chart_place{id: "project-#{@project.id}-series-#{@metric_name}",
+                     d: "#{@project.metric_on_date(@metric_name, Date.today).last.to_json}",
+                     s: "#{@project.metric_series(@metric_name, Date.today).to_json}"}
+    = link_to 'Return', project_path(@project.id), class: 'btn btn-default'
+%div.col-md-8
+  - @comments.each do |mc_pair|
+    %h3
+      = (Date.today-mc_pair.first).strftime('%Y-%m-%d')
+    %div{style: 'text-align:center'}
+      %div.chart_place{id: "project-#{@project.id}-metric-#{@metric_name}-#{mc_pair.first}",
+                       d: "#{@project.metric_on_date(@metric_name, Date.today - mc_pair.first).last.to_json}",
+                       s: "#{@project.metric_series(@metric_name, Date.today - mc_pair.first).to_json}"}
+    %br
+    %table.table-striped.table
+      %tbody
+        - mc_pair.last.each do |comment|
+          - if can? :read, comment
+            %tr{class: comment.unread? ? 'success' : 'active'}
+              %td
+                = comment.content
+%div.col-md-2
+  - if can? :create, :comment
+    = render partial: 'comment_form'
+
+:javascript
+  parent_metric = {'id': #{@parent_metric.id}, 'metric_name': '#{@parent_metric.metric_name}'};
+  global_project_id = #{@project.id};

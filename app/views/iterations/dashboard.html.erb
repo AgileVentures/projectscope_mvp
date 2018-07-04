@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <%= render partial: 'dashboard_sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="text-success">Dashboard</h1>
+      </div>
+      <h2 class="text-secondary">Projects General Progress</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+          <tr>
+            <th>Project</th>
+            <% (1..@iteration_num).each do |p|%>
+                <th>Iteration <%=p%></th>
+            <%end%>
+          </tr>
+          </thead>
+          <tbody>
+          <% @projects.each do |project| %>
+              <tr>
+                <td><%= link_to project.name, iteration_path(id: Iteration.where(project_id: project.id)[0])%></td>
+                <% (1..@iteration_num).each do |p|%>
+                    <td>
+                      <% if @progress[project.id] %>
+                          <%= render partial: 'progress_bar',locals: {project:project} %>
+                      <% end %>
+                    </td>
+                <%end%>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+%div.slider-container.col-md-12
+  %div
+    Current date:
+    %button{class: "btn btn-default btn-sm date-nav",
+            id: "day-before",
+            onclick: "Turbolinks.visit('#{page_path + "?page=#{@current_page+1}&type=#{@display_type}&days_from_now=#{@days_from_now+1}"}')"}
+      %span{class: 'glyphicon glyphicon-chevron-left'}
+    %strong{:id => "date-label"}= (Date.today-@days_from_now).to_s
+    %button{class: "btn btn-default btn-sm date-nav",
+            id: "day-after",
+            onclick: "Turbolinks.visit('#{page_path + "?page=#{@current_page+1}&type=#{@display_type}&days_from_now=#{@days_from_now-1}"}')"}
+      %span{class: 'glyphicon glyphicon-chevron-right'}
+  %div#slider-progress-indicator
+    Loading...

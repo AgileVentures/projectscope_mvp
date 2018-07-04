@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <%= render partial: 'dashboard_sidebar' %>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="text-success">Current Iteration Progress</h1>
+      </div>
+      <h2 class="text-secondary">Projects</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+          <tr>
+            <th>Project</th>
+            <th>Progress</th>
+            <th>Current Task</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Last Updated</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% Project.all.each do |project| %>
+              <tr>
+                <td><%= link_to project.name, iteration_path(id: Iteration.where(project_id: project.id)[0])%></td>
+                <td>
+                  <% if @progress[project.id] %>
+                      <% @tasks_iter[project.id].each do |task| %>
+                          <a href="#" data-toggle="tooltip" title=<%="#{task.title}"%>><span class="label label-success"> </span></a>
+                      <%end%>
+                      <% (0..@progress[project.id][0]).each do |p|%>
+                        <!-- HTML to write -->
+                        <a href="#" data-toggle="tooltip" title="Task name"><span class="label label-success"> </span></a>
+                      <%end%>
+                      <% (0..@progress[project.id][1]).each do |p|%>
+                        <a href="#" data-toggle="tooltip1" title="Some tooltip text!"><span class="label label-danger"> </span></a>
+                      <%end%>
+                      <% (0..@progress[project.id][2]).each do |p|%>
+                        <a href="#" data-toggle="tooltip1" title="Some tooltip text!"><span class="label label-primary"> </span></a>
+                      <%end%>
+                      <% (0..@progress[project.id][3]).each do |p|%>
+                          <a href="#" data-toggle="tooltip" title="Some tooltip text!"><span class="label label-info"> </span></a>
+                      <%end%>
+                  <% end %>
+                </td>
+                <td>
+                  Scrum meeting
+                </td>
+                <td>
+                  <%= Iteration.where(project_id: project.id)[0].start_time%>
+                </td>
+                <td>
+                  <%= Iteration.where(project_id: project.id)[0].end_time%>
+                </td>
+                <td>
+                  one day ago
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>
+</body>
+</html>

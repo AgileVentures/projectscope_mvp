@@ -7,18 +7,20 @@ Feature: add project and its config/credentials info
 
   Scenario: add project with config info for CodeClimate gem
     Given I am logged in
-    And I am on the projects page
-    When I follow "New Project"
-    And I fill in "Name" with "Test Project"
-    And I enter new "Code Climate" config values:
-      | key   | value |
-      | token | 12345 |
-      | login | fox   |
-    And I press "Create Project"
+    And I am on the new project page
+    Then I fill in "project_name" with "Test Project"
+    And I enter new "Github" config values:
+      | key          | value  |
+      | project      | a.com  |
+      | access_token | 12345  |
+      | main_branch  | master |
+    And I enter new "Tracker" config values:
+      | key     | value |
+      | project | b.com |
+      | token   | 5     |
+    And I press "Create"
     Then there should be a project "Test Project" with config values:
-      | metric_name  | key   | value |
-      | code_climate | token | 12345 |
-      | code_climate | login | fox   |
-
-
-
+      | metric_name      | key             | value |
+      | pull_requests    | github_project  | a.com |
+      | github_files     | github_project  | a.com |
+      | tracker_velocity | tracker_project | b.com |

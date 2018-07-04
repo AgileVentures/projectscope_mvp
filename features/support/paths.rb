@@ -17,10 +17,26 @@ module NavigationHelpers
         '/'
       when /^the projects page$/ then
         '/projects'
+      when /^the new project page$/ then
+        '/projects/new'
       when /^the edit page for project "(.*)"$/ then
         "/projects/#{Project.find_by(name: $1).id}/edit"
       when /^the login page/ then
         '/users/sign_in'
+      when /^the whitelist page/ then
+        '/whitelists'
+      when /^the whitelist management page/ then
+        '/whitelists/new'
+      when /^team selection page for student "(.*)"/ then
+        "/users/#{User.find_by(provider_username: $1).id}/init"
+      when /^the iteration page for "(.*)"/ then
+        "/iterations/#{Iteration.find_by(name: $1).id}"
+      when /^the iterations page/ then
+        "/iterations"
+      when /^the aggregation progress page/ then
+        "/aggregate_tasks_graph"
+      when /^the iteration template page/ then
+        "iterations/new"
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

@@ -3,12 +3,27 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # Gems for metrics to use
-gem 'project_metrics', git: 'https://github.com/AgileVentures/ProjectMetrics/'
-gem 'project_metric_code_climate', git: 'https://github.com/AgileVentures/project_metric_code_climate'
-gem 'project_metric_github', git: 'https://github.com/AgileVentures/project_metric_github'
-gem 'project_metric_slack', git: 'https://github.com/AgileVentures/project_metric_slack'
-gem 'project_metric_pivotal_tracker', git: 'https://github.com/AgileVentures/project_metric_pivotal_tracker'
-gem 'project_metric_slack_trends', git: 'https://github.com/AgileVentures/project_metric_slack_trends'
+gem 'project_metrics', git: 'https://github.com/an-ju/ProjectMetrics.git'
+gem 'project_metric_code_climate', git: 'https://github.com/an-ju/project_metric_code_climate.git'
+gem 'project_metric_slack', git: 'https://github.com/an-ju/project_metric_slack.git'
+gem 'project_metric_slack_trends', git: 'https://github.com/an-ju/project_metric_slack_trends.git'
+gem 'project_metric_github', git: 'https://github.com/an-ju/project_metric_github.git'
+# gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker.git'
+gem 'project_metric_story_transition', git: 'https://github.com/an-ju/project_metric_story_transitions.git'
+gem 'project_metric_point_estimation', git: 'https://github.com/an-ju/project_metric_point_estimation.git'
+gem 'project_metric_story_overall', git: 'https://github.com/an-ju/project_metric_story_overall.git'
+gem 'project_metric_collective_overview', git: 'https://github.com/an-ju/project_metric_collective_overview.git'
+gem 'project_metric_test_coverage', git: 'https://github.com/an-ju/project_metric_test_coverage.git'
+gem 'project_metric_pull_requests', git: 'https://github.com/an-ju/project_metric_pull_requests.git'
+gem 'project_metric_travis_ci', git: 'https://github.com/an-ju/project_metric_travis_ci.git'
+gem 'project_metric_github_files', git: 'https://github.com/an-ju/project_metric_github_files.git'
+gem 'project_metric_github_flow', git: 'https://github.com/an-ju/project_metric_github_flow.git'
+gem 'project_metric_tracker_velocity', git: 'https://github.com/an-ju/project_metric_tracker_velocity.git'
+gem 'project_metric_point_distribution', git: 'https://github.com/an-ju/project_metric_point_distribution.git'
+gem 'project_metric_smart_story', git: 'https://github.com/an-ju/project_metric_smart_story.git'
+gem 'project_metric_commit_message', git: 'https://github.com/an-ju/project_metric_commit_message.git'
+
+gem 'highcharts-rails'
 
 # use Rails 3-style protected attributes rather than strong params
 gem 'protected_attributes'
@@ -48,10 +63,22 @@ gem 'timecop'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Authorization and authentification
 gem 'devise'
-gem 'omniauth-github', github: 'intridea/omniauth-github'
+gem 'cancan'
+gem 'omniauth-github'
+
+gem 'json'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'font-awesome-rails'
+gem 'bootswatch-rails', '~>3.3.5'
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
+gem 'sprockets-rails', '~> 3.1.1'
+
+gem 'newrelic_rpm'
+gem 'pg', '~> 0.15'
 
 group :development, :test do
   gem 'sqlite3'
@@ -61,6 +88,8 @@ group :development, :test do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "jasmine"
+  gem 'jasmine-jquery-rails'
 end
 
 group :test do
@@ -75,7 +104,6 @@ group :test do
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'vcr'
   gem 'webmock'
-  gem 'launchy'
   gem 'codeclimate-test-reporter', require: nil
 end
 
@@ -86,6 +114,4 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
 end
-

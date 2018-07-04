@@ -15,7 +15,21 @@
 
 class MetricSample < ActiveRecord::Base
   belongs_to :project
-  scope :latest_for, ->(metric_name) { where(:metric_name => metric_name).last }
-
+  has_many :comments
   attr_encrypted :raw_data, :key => Figaro.env.attr_encrypted_key!
+
+  def self.latest_for(metric_name)
+    select(MetricSample.column_names-[:encrypted_raw_data])\
+        .where(:metric_name => metric_name).last
+  end
+
+  def self.min_date
+    earliest_metric = MetricSample.order(:created_at).first
+    earliest_metric.created_at.to_date unless earliest_metric.nil?
+  end
+
+  def days_ago
+    (Date.today - created_at.to_date).to_i
+  end
+
 end

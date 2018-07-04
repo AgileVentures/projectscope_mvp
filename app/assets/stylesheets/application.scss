@@ -12,19 +12,28 @@
  *
  */
  /*
+ *= require jquery-ui
  *= require_tree .
  */
 @import "bootstrap-sprockets";
+@import "bootswatch/flatly/variables";
 @import "bootstrap";
+@import "bootswatch/flatly/bootswatch";
+@import "font-awesome";
+
+html, body {
+  width: auto;
+  position: relative;
+}
 
 .header-bar {
-	background-color:#337ab7; 
-	padding: 10px 0px; 
-	color: white; 
-	position: fixed;
-	z-index: 10;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
+  background-color:#337ab7;
+  padding: 10px 0px;
+  color: white;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 }

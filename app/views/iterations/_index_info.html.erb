@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="text-success">Iteration Generating</h1>
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation"><a href="/iterations">STEP 1:Select Template</a></li>
+    <li role="presentation"><a href="/iterations">STEP 2:Select Projects</a></li>
+    <li role="presentation" class="active"><a href="/iterations">STEP 3:Info Update</a></li>
+  </ul>
+  <h3 class="text-info">Info Update</h3>
+</div>
+<h4 class="text-success">Template Selected: <%=@iteration.name%></h4>
+<table class="table table-striped table-sm">
+  <thead>
+  <tr>
+    <th>Project</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Apply</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @projects.each do |project| %>
+      <%= form_tag(iteration_apply_path(@iteration.id), method: "post") do %>
+          <tr>
+            <td><%=project.name%></td>
+            <td><%= text_field_tag(:start_time, hint = "yyyy/mm/dd") %></td>
+            <td><%= text_field_tag(:end_time, hint = "yyyy/mm/dd") %></td>
+            <%= hidden_field_tag :project_id, project.id %>
+            <td><%= submit_tag "apply to #{project.name}" , class: "btn btn-sm btn-outline-secondary dropdown-toggle", role: "button"%></td>
+          </tr>
+      <% end %>
+  <%end%>
+  </tbody>
+</table>

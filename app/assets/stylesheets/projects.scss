@@ -2,32 +2,76 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#gap{
-  	padding-bottom: 14px;
+.outdated-metric {
+  opacity: 0.3;
 }
-#projectlist{
-    border-collapse: collapse;
-    width: 100%;
-    margin-right: auto;
+
+.ui-slider-handle {
+  outline: none;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  padding: 5px 0px;
+}
+
+#slider-progress-indicator {
+  display: none;
+  position: absolute;
+
+}
+
+.slider-error-msg {
+  color: red;
+}
+
+#gap {
+  padding-bottom: 14px;
+}
+
+#projectlist {
+  border-collapse: collapse;
+  width: 100%;
+  margin-right: auto;
 }
 
 #projectlist td, #projectlist th {
-    border: 1px solid #ddd;
-    padding: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-#projectlist tr:nth-child(even){background-color: #f2f2f2;}
+#projectlist tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-#projectlist tr:hover {background-color: #ddd;}
+#projectlist tr:hover {
+  background-color: #ddd;
+}
 
 #projectlist th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    color: white;
-    width: 16%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  width: 16%;
 }
+
 #projectlist tr {
-   text-align: left;
-   width: 16%;
+  text-align: left;
+  width: 16%;
+}
+
+#date-slider {
+  width: 155vh;
+}
+
+.expand_metric {
+  text-align: right;
+  // font-weight: bold;
+  text-decoration: underline;
+}
+
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: green;
 }

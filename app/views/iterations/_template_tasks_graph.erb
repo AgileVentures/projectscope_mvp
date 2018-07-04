@@ -1,0 +1,33 @@
+<div>
+  <h3  class="text-info">Preliminary Task</h3>
+  <div class="row">
+    <% @preliminaryTasks.each do |task| %>
+        <%= render partial: 'task_card', locals: {node: task, iteration: @iteration,updater_type: "preliminary",task_titles: @pretaskTitles}%>
+    <% end %>
+    <% if @editable %>
+        <%= render partial: 'create_task_template',locals: {updater_type: "preliminary", task_titles: @pretaskTitles}%>
+    <% end %>
+  </div>
+</div>
+<div>
+  <h3  class="text-info">Development Task</h3>
+  <div class="row">
+    <% @devTasks.each do |task| %>
+        <%= render partial: 'task_card', locals: {node: task, iteration: @iteration,updater_type: "development", task_titles: @devtaskTitles}%>
+    <% end %>
+    <% if @editable %>
+        <%= render partial: 'create_task_template',locals: {updater_type: "development", task_titles: @devtaskTitles}%>
+    <% end %>
+  </div>
+</div>
+<div>
+  <h3  class="text-info">Post Task</h3>
+  <div class="row">
+    <% @postTasks.each do |task| %>
+        <%= render partial: 'task_card', locals: {node: task, iteration: @iteration,updater_type: "post", task_titles: @postaskTitles}%>
+    <% end %>
+    <% if @editable %>
+        <%= render partial: 'create_task_template',locals: {updater_type: "post", task_titles: @postaskTitles}%>
+    <% end %>
+  </div>
+</div>

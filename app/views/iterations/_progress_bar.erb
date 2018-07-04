@@ -1,0 +1,12 @@
+<% (0..@progress[project.id][0]).each do |p|%>
+    <span class="label label-success"> </span>
+<%end%>
+<% (0..@progress[project.id][1]).each do |p|%>
+    <span class="label label-danger"> </span>
+<%end%>
+<% (0..@progress[project.id][2]).each do |p|%>
+    <span class="label label-primary"> </span>
+<%end%>
+<% (0..@progress[project.id][3]).each do |p|%>
+    <span class="label label-info"> </span>
+<%end%>
