@@ -1,6 +1,13 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=7bee48f8a6b81501d9ac7d0f45517d7721c15fe1b09a6d23d3928bb05c122b90
 language: ruby
 rvm:
   - 2.3.1
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 before_install:
   - "phantomjs --version"
   - "export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
@@ -15,4 +22,4 @@ script:
   - bundle exec rspec
   - bundle exec cucumber
 after_script:
-  - bundle exec rake send_to_codeclimate 
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

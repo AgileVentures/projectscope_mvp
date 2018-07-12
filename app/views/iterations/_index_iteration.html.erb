@@ -1,0 +1,87 @@
+<h1 class="text-success">Iterations Templates</h1>
+<ul class="nav nav-tabs nav-justified">
+  <li role="presentation" class="active"><a href="/iterations">STEP 1:Select or Create Template</a></li>
+  <li role="presentation"><a href="/iterations">STEP 2:Select Projects</a></li>
+  <li role="presentation"><a href="/iterations">STEP 3:Info Update</a></li>
+</ul>
+<div class="table-responsive">
+  <h3 class="text-info">Select Template</h3>
+  <!-- Modal -->
+  <% Iteration.where(template:  true).each do |iter| %>
+    <%tasks = Task.where(iteration: iter.id)%>
+    <div class="modal fade" id="myModalIter<%="#{iter.id}"%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Iteration Tasks Graph</h4>
+          </div>
+          <div class="modal-body">
+                <div class="text-secondary">
+                  <h4>Preliminary Tasks</h4>
+                  <div class="row">
+                    <% tasks.select{|task| task.updater_type == 'preliminary'}.each do |task| %>
+                        <%= render partial: 'plain_task_card', locals: {node: task}%>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="text-secondary">
+                  <h4>Development Tasks</h4>
+                  <div class="row">
+                    <% tasks.select{|task| task.updater_type == 'development'}.each do |task| %>
+                        <%= render partial: 'plain_task_card', locals: {node: task}%>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="text-secondary">
+                  <h4>Post Task</h4>
+                  <div class="row">
+                    <% tasks.select{|task| task.updater_type == 'post'}.each do |task| %>
+                        <%= render partial: 'plain_task_card', locals: {node: task}%>
+                    <% end %>
+                  </div>
+                </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%end%>
+
+  <table class="table table-striped table-sm">
+    <thead>
+    <tr>
+      <th>Template</th>
+      <th>Application</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <td> </td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @iterations.where(template:true).each do |iter| %>
+        <tr>
+          <td>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModalIter<%="#{iter.id}"%>">
+              <%=iter.name%>
+            </button></td>
+          <td>1</td>
+          <td><%= link_to iter.name, show_iter_temp_path(id: iter.id)%></td>
+          <td><%= link_to iter.name, delete_iteration_path(id: iter.id)%></td>
+          <td><a><%= link_to "Select and Go Next Step", iter_select_projs_path(id:iter.id), class:"btn btn-default btn-sm", type:"button", style:"float: center;"%> </a></td>
+        </tr>
+    <%end%>
+    </tbody>
+  </table>
+
+  <h3 class="text-info">Create Template</h3>
+  <%= label_tag(:template, "Template Name:") %>
+  <%= form_tag(href="/iterations", method: "post") do %>
+      <%= text_field_tag(:template) %>
+      <%= submit_tag "Create Template" , class: "card-link btn btn-sm btn-success", role: "button"%>
+  <% end %>
+</div>

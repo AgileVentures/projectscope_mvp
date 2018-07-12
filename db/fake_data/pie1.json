@@ -1,0 +1,34 @@
+{
+  "chartType":"pie",
+  "titleText":"Story Status",
+  "data":[{
+    "name": "Story Status",
+    "colorByPoint": true,
+    "data": [{
+      "name": "Delivered",
+      "y": 10.00,
+      "color": "#f15c80"
+    }, {
+      "name": "Started",
+      "y": 20.00,
+      "sliced": true,
+      "color": "#f7a35c"
+    }, {
+      "name": "Finished",
+      "y": 10.00,
+      "color": "#8085e9"
+    }, {
+      "name": "Accepted",
+      "y": 50.00,
+      "color": "#e4d354"
+    }, {
+      "name": "Unstarted",
+      "y": 8.00,
+      "color": "#90ed7d"
+    }, {
+      "name": "Unscheduled",
+      "y": 2.00,
+      "color": "#7cb5ec"
+    }]
+  }]
+}

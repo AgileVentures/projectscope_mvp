@@ -1,0 +1,10 @@
+{
+  "chartType":"pull_requests",
+  "titleText":"Pull Request Status",
+  "data": {
+    "total": "30",
+    "open": "20",
+    "closed": "10",
+    "commented": "3"
+  }
+}

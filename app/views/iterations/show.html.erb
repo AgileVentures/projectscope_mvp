@@ -1,0 +1,64 @@
+<ol class="breadcrumb">
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Projects</a></li>
+  <li class="active">Iteration 1</li>
+</ol>
+<div class="page-header">
+  <h1> Tasks Graph <small>Audience 1st</small></h1>
+</div>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Preliminary</a></li>
+  <li role="presentation"><a href="#">Development</a></li>
+  <li role="presentation"><a href="#">Post</a></li>
+</ul>
+<div class="body-timeline">
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: <%= @prepercent %>%">
+      <span class="sr-only"><%=@prepercent%>% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width: <%= @predan %>%">
+      <span class="sr-only"><%=@predan%>% Complete (danger)</span>
+    </div>
+  </div>
+  <section id="timeline" class="body-timeline">
+    <% @preliminaryTasks.each do |task| %>
+        <article>
+          <%= render partial: 'temp_task_card', locals: {node: task, updater_type: "preliminary",task_titles: @pretaskTitles}%>
+        </article>
+    <% end %>
+  </section>
+</div>
+<div class="body-timeline">
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: <%=@devpercent %>%">
+      <span class="sr-only"><%=@devpercent%>% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width: <%= @devdan %>%">
+      <span class="sr-only"><%=@devdan%>% Complete (danger)</span>
+    </div>
+  </div>
+  <section id="timeline" class="body-timeline">
+    <% @devTasks.each do |task| %>
+        <article>
+          <%= render partial: 'temp_task_card', locals: {node: task, updater_type: "development",task_titles: @devtaskTitles}%>
+        </article>
+    <% end %>
+  </section>
+</div>
+<div class="body-timeline">
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: <%= @postpercent %>%">
+      <span class="sr-only"><%=@postpercent%>% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width: <%= @postdan %>%">
+      <span class="sr-only"><%=@postdan%>% Complete (danger)</span>
+    </div>
+  </div>
+  <section id="timeline" class="body-timeline">
+    <% @postTasks.each do |task| %>
+        <article>
+          <%= render partial: 'temp_task_card', locals: {node: task, updater_type: "post",task_titles: @postaskTitles}%>
+        </article>
+    <% end %>
+  </section>
+</div>

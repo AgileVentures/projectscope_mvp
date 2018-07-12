@@ -1,0 +1,8 @@
+{
+  "chartType":"smart_story",
+  "titleText":"Story Descriptions",
+  "data": {
+    "smart_stories": [],
+    "non_smart_stories": []
+  }
+}

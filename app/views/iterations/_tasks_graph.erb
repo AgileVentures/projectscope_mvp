@@ -1,0 +1,57 @@
+<div>
+  <h3>Preliminary Task</h3>
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: <%= @prepercent %>%">
+      <span class="sr-only"><%=@test%>% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width: <%= @predan %>%">
+      <span class="sr-only">10% Complete (danger)</span>
+    </div>
+  </div>
+  <div class="row">
+    <% @preliminaryTasks.each do |task| %>
+        <%= render partial: 'task_card', locals: {node: task, iteration: @iteration,updater_type: "preliminary",task_titles: @pretaskTitles}%>
+    <% end %>
+    <% if @editable %>
+        <%= render partial: 'create_task_card',locals: {updater_type: "preliminary", task_titles: @pretaskTitles}%>
+    <% end %>
+  </div>
+</div>
+<div>
+  <h3>Development Task</h3>
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: <%= @devpercent %>%">
+      <span class="sr-only">Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width: <%= @devdan %>%">
+      <span class="sr-only">Complete (danger)</span>
+    </div>
+  </div>
+  <div class="row">
+    <% @devTasks.each do |task| %>
+        <%= render partial: 'task_card', locals: {node: task, iteration: @iteration,updater_type: "development", task_titles: @devtaskTitles}%>
+    <% end %>
+    <% if @editable %>
+        <%= render partial: 'create_task_card',locals: {updater_type: "development", task_titles: @devtaskTitles}%>
+    <% end %>
+  </div>
+</div>
+<div>
+  <h3>Post Task</h3>
+  <div class="progress">
+    <div class="progress-bar progress-bar-success" style="width: <%= @postpercent %>%">
+      <span class="sr-only">35% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger" style="width: <%= @postdan %>%">
+      <span class="sr-only">10% Complete (danger)</span>
+    </div>
+  </div>
+  <div class="row">
+    <% @postTasks.each do |task| %>
+        <%= render partial: 'task_card', locals: {node: task, iteration: @iteration,updater_type: "post", task_titles: @postaskTitles}%>
+    <% end %>
+    <% if @editable %>
+        <%= render partial: 'create_task_card',locals: {updater_type: "post", task_titles: @postaskTitles}%>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "chartType":"commit_message",
+  "titleText":"Github commit messages",
+  "data": {
+    "bad_commits": "0",
+    "type_counting": {
+      "feat": "10",
+      "refactor": "3",
+      "chore": "2"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+%h1
+  New to the system?
+
+= form_for @user, url: init_user_path do |f|
+  %div.form-group
+    %label{for: 'project_id'}
+      Please select your team:
+    = select_tag :project_id, options_for_select(@projects.map { |p| [p.name, p.id] })
+  = f.submit class: 'btn btn-default'
+
